@@ -41,7 +41,7 @@ class RoboEnv(gym.Env):
         # Instantiate the environment
         self.env = suite.make(env_name= self.Task, 
                                 robots="Panda",
-                                has_renderer=self.RenderMode,
+                                has_renderer=False,
                                 has_offscreen_renderer=False,
                                 horizon=500,    
                                 use_camera_obs=False,)
@@ -143,6 +143,6 @@ time_steps = 10000
 for i in range(1000):
     # add the reset_num_timesteps=False argument to the learn function to prevent the model from resetting the timestep counter
     # add the tb_log_name argument to the learn function to log the tensorboard data to the correct folder
-    model.learn(total_timesteps=time_steps, callback=wandb_callback, progress_bar=True, reset_num_timesteps=False,tb_log_name=f"runs/{run.id}")
+    model.learn(total_timesteps=time_steps, callback=wandb_callback, reset_num_timesteps=False,tb_log_name=f"runs/{run.id}")
     # save the model to the models folder with the run id and the current timestep
-    model.save(f"models/{run.id}/{time_steps*(i+1)}")
+    #model.save(f"models/{run.id}/{time_steps*(i+1)}")
