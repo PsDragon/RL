@@ -55,16 +55,17 @@ class RoboEnv(gym.Env):
         # You may find it useful to create helper functions for the following
 
         gripper_pos = obs["robot0_eef_pos"]
-        yaw_robot = quat_to_rpy(obs["robot0_eef_quat"])
+        #yaw_robot = quat_to_rpy(obs["robot0_eef_quat"])
 
 
         obs = np.hstack((obs["robot0_proprio-state"],self.target_pos))
         #obs = np.hstack((obs, yaw_robot))
 
-        reward1 = 1 / np.linalg.norm(self.target_pos - gripper_pos)
-        #reward2 = 1 / np.linalg.norm(self.target_yaw - yaw_robot)
+        reward_xyz = 1 / np.linalg.norm(self.target_pos - gripper_pos)
+        
+        #reward_yaw = 1 / np.linalg.norm(self.target_yaw - yaw_robot)
 
-        reward = reward1 
+        reward = reward_xyz
         #self.env.render()
         # done = # Calculate if the episode is done if you want to terminate the episode early
         return obs, reward, done, _
